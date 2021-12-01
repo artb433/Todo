@@ -10,13 +10,13 @@ class PaddingWithText extends StatelessWidget {
   final FontWeight? fontWeight;
   const PaddingWithText(
       {Key? key,
-      this.text,
-      this.fontSize,
-      this.color,
-      this.fontWeight,
-      this.fontStyle,
-      this.style,
-      this.padding})
+      required this.text,
+      required this.fontSize,
+      required this.color,
+      required this.fontWeight,
+      required this.fontStyle,
+      required this.style,
+      required this.padding})
       : super(key: key);
 
   @override

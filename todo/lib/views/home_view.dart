@@ -43,7 +43,17 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PaddingWithText(),
+            const Padding(
+              padding: EdgeInsets.all(18),
+              child: Text("What's up,Art B",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(161, 167, 200, 1),
+                    fontStyle: FontStyle.normal,
+                  )),
+            ),
             const Padding(
               padding: EdgeInsets.only(left: 18.0, top: 17, bottom: 4),
               child: Text("CATEGORIES",
@@ -81,7 +91,7 @@ class HomeView extends StatelessWidget {
                             ),
                             const Padding(
                               padding: EdgeInsets.only(
-                                  left: 15.0, top: 6, bottom: 10),
+                                  left: 10.0, top: 6, bottom: 10),
                               child: Text('Business',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
