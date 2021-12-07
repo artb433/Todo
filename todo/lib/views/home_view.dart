@@ -10,20 +10,171 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Container(
+          color: const Color.fromRGBO(14, 31, 85, 1),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 68.0, left: 65),
+                    child: CircularPercentIndicator(
+                      center: const Card(
+                        shape: CircleBorder(
+                          side: BorderSide(width: 1, color: Colors.white),
+                        ),
+                        child: CircleAvatar(
+                          radius: 55,
+                          backgroundImage: AssetImage('assets/images/me.jpeg'),
+                        ),
+                      ),
+                      radius: 150,
+                      animation: true,
+                      progressColor: Colors.pink,
+                      percent: 0.4,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, bottom: 80),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const SizedBox(
+                        height: 60,
+                        width: 70,
+                        child: Card(
+                          shape: CircleBorder(
+                            side: BorderSide(width: 1, color: Colors.white),
+                          ),
+                          color: Color.fromRGBO(14, 31, 85, 1),
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.0),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 22.0, right: 34),
+                child: Text('Tahiru \n Abdul Rahman',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontStyle: FontStyle.normal,
+                    )),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(80, 20, 0, 0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.bookmark_border_outlined,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Templates',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontStyle: FontStyle.normal,
+                              )),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.category_outlined,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Categories',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontStyle: FontStyle.normal,
+                              )),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.pie_chart_outline_outlined,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Analytics',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontStyle: FontStyle.normal,
+                              )),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.settings_outlined,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Settings',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontStyle: FontStyle.normal,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       backgroundColor: const Color.fromRGBO(249, 250, 250, 1),
       appBar: AppBar(
         toolbarHeight: 45,
         elevation: 0,
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 3.0),
-          child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.menu,
-                color: Colors.grey.shade700,
-              )),
-        ),
+        iconTheme: const IconThemeData(color: Color.fromRGBO(171, 158, 158, 1)),
+        // leading: Padding(
+        //   padding: const EdgeInsets.only(left: 3.0),
+        //   child: IconButton(
+        //       onPressed: () {},
+        //       icon: Icon(
+        //         Icons.menu,
+        //         color: Colors.grey.shade700,
+        //       )),
+        // ),
         actions: [
           IconButton(
               tooltip: 'search',
@@ -45,12 +196,12 @@ class HomeView extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.all(18),
-              child: Text("What's up,Art B",
+              child: Text("What's up,Art B!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(161, 167, 200, 1),
+                    fontWeight: FontWeight.w900,
+                    color: Color.fromRGBO(39, 35, 87, 1),
                     fontStyle: FontStyle.normal,
                   )),
             ),
@@ -91,7 +242,7 @@ class HomeView extends StatelessWidget {
                             ),
                             const Padding(
                               padding: EdgeInsets.only(
-                                  left: 10.0, top: 6, bottom: 10),
+                                  left: 15.0, top: 2, bottom: 6),
                               child: Text('Business',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -106,7 +257,7 @@ class HomeView extends StatelessWidget {
                               child: LinearPercentIndicator(
                                 width: MediaQuery.of(context).size.width * 0.32,
                                 lineHeight: 4.0,
-                                percent: 0.6,
+                                percent: 0.4,
                                 progressColor: Colors.pink,
                               ),
                             ),
@@ -138,7 +289,7 @@ class HomeView extends StatelessWidget {
                           ),
                           const Padding(
                             padding:
-                                EdgeInsets.only(left: 15.0, top: 6, bottom: 10),
+                                EdgeInsets.only(left: 15.0, top: 2, bottom: 6),
                             child: Text('Personal',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -153,7 +304,7 @@ class HomeView extends StatelessWidget {
                             child: LinearPercentIndicator(
                               width: MediaQuery.of(context).size.width * 0.32,
                               lineHeight: 4.0,
-                              percent: 0.6,
+                              percent: 0.18,
                               progressColor: Colors.blue,
                             ),
                           ),
@@ -178,8 +329,59 @@ class HomeView extends StatelessWidget {
                 maxHeight: MediaQuery.of(context).size.height,
               ),
               child: ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 10),
+                itemCount: 50,
+                itemBuilder: (BuildContext context, int index) {
+                  return Dismissible(
+                    resizeDuration: const Duration(seconds: 7),
+                    background: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.delete_forever_outlined),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text('The task was deleted'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 48.0),
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 15),
+                            child: SizedBox(
+                              width: 70,
+                              height: 40,
+                              child: InkWell(
+                                onTap: () {},
+                                child: Card(
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Row(
+                                    children: const [
+                                      Text(
+                                        'UNDO',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                          fontStyle: FontStyle.normal,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    key: const Key(''),
+                    child: Card(
                         elevation: 0,
                         child: Row(
                           children: const [
@@ -197,11 +399,10 @@ class HomeView extends StatelessWidget {
                                   fontStyle: FontStyle.normal,
                                 )),
                           ],
-                        ));
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 10),
-                  itemCount: 20),
+                        )),
+                  );
+                },
+              ),
             )
           ],
         ),
