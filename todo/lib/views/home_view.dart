@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:todo/views/create_todo_view.dart';
 import 'package:todo/views/custom_widget/padding_with_text.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -154,6 +155,27 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+              SizedBox(
+                height: 150,
+                width: 50,
+                child: LineChart(
+                  LineChartData(
+                      borderData: FlBorderData(show: false),
+                      lineBarsData: [
+                        LineChartBarData(spots: const [
+                          FlSpot(0, 1),
+                          FlSpot(1, 3),
+                          FlSpot(2, 10),
+                          FlSpot(3, 7),
+                          FlSpot(4, 12),
+                          FlSpot(5, 13),
+                          FlSpot(6, 17),
+                          FlSpot(7, 15),
+                          FlSpot(8, 20)
+                        ])
+                      ]),
                 ),
               ),
             ],
