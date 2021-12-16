@@ -78,13 +78,13 @@ class _CreateTodoViewState extends State<CreateTodoView> {
                       child: Row(
                         children: [
                           Text(_value,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black45,
                                 fontStyle: FontStyle.normal,
                               )),
-                          Icon(Icons.arrow_drop_down),
+                          const Icon(Icons.arrow_drop_down),
                         ],
                       ),
                     ),

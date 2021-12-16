@@ -27,12 +27,13 @@ class HomeView extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: 55,
-                          backgroundImage: AssetImage('assets/images/me.jpeg'),
+                          backgroundImage:
+                              AssetImage('assets/images/artb.jpeg'),
                         ),
                       ),
                       radius: 150,
                       animation: true,
-                      animationDuration: 1000,
+                      animationDuration: 1600,
                       progressColor: Colors.pink,
                       percent: 0.4,
                     ),
@@ -101,23 +102,26 @@ class HomeView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.category_outlined,
-                          color: Colors.white,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Categories',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.white,
-                                fontStyle: FontStyle.normal,
-                              )),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.category_outlined,
+                            color: Colors.white,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Categories',
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: const [
@@ -412,7 +416,7 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext) => const CreateTodoView()));
+              builder: (buildContext) => const CreateTodoView()));
         },
         child: const Icon(
           Icons.add,

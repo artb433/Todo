@@ -37,6 +37,8 @@ dependencies:
   percent_indicator: ^3.4.0
   charts_flutter: ^0.12.0
   fl_chart: ^0.40.5
+  http: ^0.13.4
+  convert: ^3.0.1
 
 dev_dependencies:
   flutter_test:
