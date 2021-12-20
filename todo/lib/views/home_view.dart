@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:todo/controller/todo_controller.dart';
 import 'package:todo/views/create_todo_view.dart';
 import 'package:todo/views/custom_widget/padding_with_text.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:todo/models/todo_model.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final TodoController _todoController = TodoController();
+
+  @override
+  void initState() {
+    _todoController.getAllTodos();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,15 +187,6 @@ class HomeView extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Color.fromRGBO(171, 158, 158, 1)),
-        // leading: Padding(
-        //   padding: const EdgeInsets.only(left: 3.0),
-        //   child: IconButton(
-        //       onPressed: () {},
-        //       icon: Icon(
-        //         Icons.menu,
-        //         color: Colors.grey.shade700,
-        //       )),
-        // ),
         actions: [
           IconButton(
               tooltip: 'search',
@@ -330,86 +336,98 @@ class HomeView extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                   )),
             ),
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height,
-              ),
-              child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 10),
-                itemCount: 50,
-                itemBuilder: (BuildContext context, int index) {
-                  return Dismissible(
-                    resizeDuration: const Duration(seconds: 7),
-                    background: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.delete_forever_outlined),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 18.0),
-                          child: Text('The task was deleted'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 48.0),
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            child: SizedBox(
-                              width: 70,
-                              height: 40,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Card(
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: Row(
-                                    children: const [
-                                      Text(
-                                        'UNDO',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                          fontStyle: FontStyle.normal,
-                                        ),
+            FutureBuilder(
+                future: _todoController.getAllTodos(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting &&
+                      snapshot.data == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.data == null) {
+                    return const Text(
+                      'Something went wrong',
+                      style: TextStyle(fontSize: 30),
+                    );
+                  }
+
+                  Todo? todo = snapshot.data as Todo;
+                  return ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(height: 10),
+                    itemCount: todo.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Dismissible(
+                        resizeDuration: const Duration(seconds: 7),
+                        background: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(Icons.delete_forever_outlined),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 18.0),
+                              child: Text('The task was deleted'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 48.0),
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 15),
+                                child: SizedBox(
+                                  width: 70,
+                                  height: 40,
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Card(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(50),
                                       ),
-                                    ],
+                                      child: Row(
+                                        children: const [
+                                          Text(
+                                            'UNDO',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    key: const Key(''),
-                    child: Card(
-                        elevation: 0,
-                        child: Row(
-                          children: const [
-                            Radio(
-                              value: '',
-                              groupValue: '',
-                              onChanged: null,
-                              activeColor: Colors.pink,
-                            ),
-                            Text('Daily meeting with team',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.normal,
-                                )),
                           ],
-                        )),
+                        ),
+                        key: const Key(''),
+                        child: Card(
+                            elevation: 0,
+                            child: Row(
+                              children: [
+                                const Radio(
+                                  value: '',
+                                  groupValue: '',
+                                  onChanged: null,
+                                  activeColor: Colors.pink,
+                                ),
+                                Text(todo.data![index].todoTitle!,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                              ],
+                            )),
+                      );
+                    },
                   );
-                },
-              ),
-            )
+                })
           ],
         ),
       ),
