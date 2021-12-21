@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:todo/controller/todo_controller.dart';
 import 'package:todo/views/create_todo_view.dart';
-import 'package:todo/views/custom_widget/padding_with_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:todo/models/todo_model.dart';
 

@@ -13,6 +13,7 @@ class TodoController {
       if (statusCode == 200) {
         //success
         _todo = Todo.fromJson(json.decode(response.body));
+        // ignore: avoid_print
         print(_todo!.data.toString());
       } else {
         //error
@@ -81,3 +82,10 @@ class TodoController {
     return isDeleted;
   }
 }
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final welcome = todoFromJson(jsonString);
+//     final Todo = TodoFromJson(jsonString);
 
 import 'dart:convert';
 
