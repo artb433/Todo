@@ -6,11 +6,22 @@ import 'package:todo/views/create_todo_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:todo/models/todo_model.dart';
 
+// class HomeView extends StatefulWidget {
+//   const HomeView({Key? key}) : super(key: key);
+
+//   @override
+//   State<HomeView> createState() => _HomeViewState();
+// }
+
+// class _HomeViewState extends State<HomeView> {
+
+// }
+
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  // const HomeView({ Key? key }) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
@@ -378,6 +389,7 @@ class _HomeViewState extends State<HomeView> {
                                   child: InkWell(
                                     onTap: () {},
                                     child: Card(
+                                      color: Colors.blue,
                                       elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(50),

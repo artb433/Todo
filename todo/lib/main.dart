@@ -26,7 +26,7 @@ class ToDoApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.indigo,
       ),
-      home: const HomeView(),
+      home: HomeView(),
     );
   }
 }
