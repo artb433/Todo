@@ -346,99 +346,153 @@ class _HomeViewState extends State<HomeView> {
                     fontStyle: FontStyle.normal,
                   )),
             ),
-            FutureBuilder(
-                future: _todoController.getAllTodos(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting &&
-                      snapshot.data == null) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.data == null) {
-                    return const Text(
-                      'Something went wrong',
-                      style: TextStyle(fontSize: 30),
-                    );
-                  }
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: FutureBuilder(
+                  future: _todoController.getAllTodos(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting &&
+                        snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.data == null) {
+                      return const Text(
+                        'Something went wrong',
+                        style: TextStyle(fontSize: 30),
+                      );
+                    }
 
-                  Todo? todo = snapshot.data as Todo;
-                  return ListView.separated(
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 10),
-                    itemCount: todo.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Dismissible(
-                        resizeDuration: const Duration(seconds: 7),
-                        background: Row(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(Icons.delete_forever_outlined),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 18.0),
-                              child: Text('The task was deleted'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 48.0),
-                              child: Container(
-                                margin: const EdgeInsets.only(left: 15),
-                                child: SizedBox(
-                                  width: 70,
-                                  height: 40,
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Card(
-                                      color: Colors.blue,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Row(
-                                        children: const [
-                                          Text(
-                                            'UNDO',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                    Todo? todo = snapshot.data as Todo;
+                    return ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 80,
+                            child: Card(
+                              elevation: 0,
+                              child: Row(
+                                children: [
+                                  const Radio(
+                                    value: '',
+                                    groupValue: '',
+                                    onChanged: null,
+                                    activeColor: Colors.pink,
                                   ),
-                                ),
+                                  Text(
+                                    todo.data![index].todoTitle!,
+                                    style: const TextStyle(
+                                        //decoration: TextDecoration.lineThrough,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                        key: const Key(''),
-                        child: Card(
-                            elevation: 0,
-                            child: Row(
-                              children: [
-                                const Radio(
-                                  value: '',
-                                  groupValue: '',
-                                  onChanged: null,
-                                  activeColor: Colors.pink,
-                                ),
-                                Text(todo.data![index].todoTitle!,
-                                    style: const TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                              ],
-                            )),
-                      );
-                    },
-                  );
-                })
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(height: 5),
+                        itemCount: todo.data!.length); //Pass the lenght here
+                  }),
+            ),
+
+            // FutureBuilder(
+            //     future: _todoController.getAllTodos(),
+            //     builder: (context, snapshot) {
+            //       if (snapshot.connectionState == ConnectionState.waiting &&
+            //           snapshot.data == null) {
+            //         return const Center(child: CircularProgressIndicator());
+            //       }
+            //       if (snapshot.connectionState == ConnectionState.done &&
+            //           snapshot.data == null) {
+            //         return const Text(
+            //           'Something went wrong',
+            //           style: TextStyle(fontSize: 30),
+            //         );
+            //       }
+
+            //       Todo? todo = snapshot.data as Todo;
+            //       return Builder(builder: (context) {
+            //         return ListView.separated(
+            //           separatorBuilder: (BuildContext context, int index) =>
+            //               const SizedBox(height: 10),
+            //           itemCount: todo.data!.length,
+            //           itemBuilder: (BuildContext context, int index) {
+            //             return Dismissible(
+            //               resizeDuration: const Duration(seconds: 7),
+            //               background: Row(
+            //                 children: [
+            //                   const Padding(
+            //                     padding: EdgeInsets.all(8.0),
+            //                     child: Icon(Icons.delete_forever_outlined),
+            //                   ),
+            //                   const Padding(
+            //                     padding: EdgeInsets.only(left: 18.0),
+            //                     child: Text('The task was deleted'),
+            //                   ),
+            //                   Padding(
+            //                     padding: const EdgeInsets.only(left: 48.0),
+            //                     child: Container(
+            //                       margin: const EdgeInsets.only(left: 15),
+            //                       child: SizedBox(
+            //                         width: 70,
+            //                         height: 40,
+            //                         child: InkWell(
+            //                           onTap: () {},
+            //                           child: Card(
+            //                             color: Colors.blue,
+            //                             elevation: 0,
+            //                             shape: RoundedRectangleBorder(
+            //                               borderRadius:
+            //                                   BorderRadius.circular(50),
+            //                             ),
+            //                             child: Row(
+            //                               children: const [
+            //                                 Text(
+            //                                   'UNDO',
+            //                                   textAlign: TextAlign.center,
+            //                                   style: TextStyle(
+            //                                     fontSize: 18.0,
+            //                                     fontWeight: FontWeight.w500,
+            //                                     color: Colors.black,
+            //                                     fontStyle: FontStyle.normal,
+            //                                   ),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //               key: const Key(''),
+            //               child: Card(
+            //                   elevation: 0,
+            //                   child: Row(
+            //                     children: [
+            //                       const Radio(
+            //                         value: '',
+            //                         groupValue: '',
+            //                         onChanged: null,
+            //                         activeColor: Colors.pink,
+            //                       ),
+            //                       Text(todo.data![index].todoTitle!,
+            //                           style: const TextStyle(
+            //                             fontSize: 16.0,
+            //                             fontWeight: FontWeight.w400,
+            //                             color: Colors.black,
+            //                             fontStyle: FontStyle.normal,
+            //                           )),
+            //                     ],
+            //                   )),
+            //             );
+            //           },
+            //         );
+            //       });
+            //     })
           ],
         ),
       ),
